@@ -133,87 +133,89 @@ export default async function MentorPage({ params }) {
           All mentors
         </Link>
 
-        <header className="mt-8 flex flex-wrap items-start gap-5">
-          {mentor.image ? (
-            <Image
-              src={mentor.image}
-              alt={`${mentor.name}, ${mentor.role}`}
-              width={112}
-              height={112}
-              className="size-24 shrink-0 rounded-full object-cover sm:size-28"
-            />
-          ) : (
-            <div
-              aria-hidden
-              className="flex size-24 shrink-0 items-center justify-center rounded-full bg-foreground/10 text-3xl font-bold uppercase sm:size-28"
-            >
-              {mentor.name.slice(0, 2)}
-            </div>
-          )}
-          <div className="min-w-0 flex-1">
-            <span
-              aria-hidden
-              className={`block h-1 w-10 ${ACCENTS[mentor.accent] ?? ACCENTS.blue}`}
-            />
-            <h1 className="mt-4 text-[clamp(1.75rem,5vw,3rem)] font-bold leading-tight tracking-tight">
-              {mentor.name}
-            </h1>
-            <p className="mt-2 text-sm font-bold uppercase tracking-tight text-foreground/60">
-              {mentor.role}
-            </p>
-            {mentor.organization && (
-              <p className="mt-1 text-foreground/50">
-                {mentor.organizationUrl ? (
-                  <a
-                    href={mentor.organizationUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-bold transition hover:text-brand-blue"
-                  >
-                    {mentor.organization}
-                  </a>
-                ) : (
-                  mentor.organization
-                )}
+        <header className="mt-8">
+          <div className="flex items-start gap-4 sm:gap-5">
+            {mentor.image ? (
+              <Image
+                src={mentor.image}
+                alt={`${mentor.name}, ${mentor.role}`}
+                width={112}
+                height={112}
+                className="size-20 shrink-0 rounded-full object-cover sm:size-28"
+              />
+            ) : (
+              <div
+                aria-hidden
+                className="flex size-20 shrink-0 items-center justify-center rounded-full bg-foreground/10 text-2xl font-bold uppercase sm:size-28 sm:text-3xl"
+              >
+                {mentor.name.slice(0, 2)}
+              </div>
+            )}
+            <div className="min-w-0 flex-1">
+              <span
+                aria-hidden
+                className={`block h-1 w-10 ${ACCENTS[mentor.accent] ?? ACCENTS.blue}`}
+              />
+              <h1 className="mt-4 text-[clamp(1.375rem,7vw,3rem)] font-bold leading-tight tracking-tight wrap-break-word">
+                {mentor.name}
+              </h1>
+              <p className="mt-2 text-sm font-bold uppercase tracking-tight text-foreground/60 wrap-break-word">
+                {mentor.role}
               </p>
-            )}
-
-            {mentor.bio && (
-              <p className="mt-5 max-w-2xl leading-relaxed text-foreground/70">
-                {mentor.bio}
-              </p>
-            )}
-
-            {(mentor.topics?.length ?? 0) > 0 && (
-              <ul className="mt-5 flex flex-wrap gap-2">
-                {mentor.topics.map((topic) => (
-                  <li
-                    key={topic}
-                    className="rounded-sm bg-foreground/5 px-2 py-1 text-xs font-bold uppercase tracking-tight text-foreground/70"
-                  >
-                    {topic}
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            <div className="mt-6 flex items-center gap-4">
-              {SOCIALS.filter(({ key }) => mentor[key]).map(
-                ({ key, href, Icon, label }) => (
-                  <a
-                    key={key}
-                    href={href(mentor)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={`${mentor.name} on ${label}`}
-                    aria-label={`${mentor.name} on ${label}`}
-                    className="text-foreground transition hover:text-brand-blue"
-                  >
-                    <Icon className="size-5" aria-hidden />
-                  </a>
-                ),
+              {mentor.organization && (
+                <p className="mt-1 text-foreground/50 wrap-break-word">
+                  {mentor.organizationUrl ? (
+                    <a
+                      href={mentor.organizationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-bold transition hover:text-brand-blue"
+                    >
+                      {mentor.organization}
+                    </a>
+                  ) : (
+                    mentor.organization
+                  )}
+                </p>
               )}
             </div>
+          </div>
+
+          {mentor.bio && (
+            <p className="mt-6 max-w-2xl leading-relaxed text-foreground/70 sm:mt-5">
+              {mentor.bio}
+            </p>
+          )}
+
+          {(mentor.topics?.length ?? 0) > 0 && (
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {mentor.topics.map((topic) => (
+                <li
+                  key={topic}
+                  className="rounded-sm bg-foreground/5 px-2 py-1 text-xs font-bold uppercase tracking-tight text-foreground/70"
+                >
+                  {topic}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <div className="mt-6 flex items-center gap-4">
+            {SOCIALS.filter(({ key }) => mentor[key]).map(
+              ({ key, href, Icon, label }) => (
+                <a
+                  key={key}
+                  href={href(mentor)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={`${mentor.name} on ${label}`}
+                  aria-label={`${mentor.name} on ${label}`}
+                  className="text-foreground transition hover:text-brand-blue"
+                >
+                  <Icon className="size-5" aria-hidden />
+                </a>
+              ),
+            )}
           </div>
         </header>
 
